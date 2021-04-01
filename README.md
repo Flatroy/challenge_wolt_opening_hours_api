@@ -29,6 +29,14 @@ python -m flask run
 
 Navigate to `http://127.0.0.1:5000/shifts` for further instructions
 
+# Testing
+
+To run unit tests use following command:
+
+```
+python -m unittest -v
+```
+
 ## Notes on task
 
 * What if day has only "close" time but no "open" time? Will that day be considered as Work day? For example:
