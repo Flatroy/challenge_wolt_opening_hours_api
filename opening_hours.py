@@ -1,8 +1,20 @@
-from flask import Flask, request, redirect, url_for
+from typing import List
+
+from flask import Flask, abort, request, redirect, url_for
 
 from examples import example_input, example_output
 
 app = Flask(__name__)
+
+weekday_order = {
+    "monday": 0,
+    "tuesday": 1,
+    "wednesday": 2,
+    "thursday": 3,
+    "friday": 4,
+    "saturday": 5,
+    "sunday": 6,
+}
 
 
 def show_shifts_endpoint_instructions():
@@ -21,6 +33,21 @@ def show_shifts_endpoint_instructions():
         """
 
 
+def validate_shifts(shifts_data: dict) -> List[str]:
+    errors = list()
+    for day in weekday_order:
+        if day not in shifts_data:
+            errors.append(f"'{day}' data missed in JSON input")
+        else:
+            for hours in shifts_data[day]:
+                if ("type" not in hours or
+                        "value" not in hours or
+                        hours["type"] not in ("open", "close") or
+                        not isinstance(hours["value"], int)):
+                    errors.append(f"'{day}' has invalid hours data")
+    return errors
+
+
 @app.route('/')
 def index():
     return redirect(url_for('shifts'))
@@ -30,6 +57,10 @@ def index():
 def shifts():
     if request.method == "POST":
         json_data = request.get_json()  # raise and return "bad request" if non-valid JSON
+        errors = validate_shifts(json_data)
+        if errors:
+            abort(400, description="\n".join(errors))
+
         return json_data
     else:
         return show_shifts_endpoint_instructions()
