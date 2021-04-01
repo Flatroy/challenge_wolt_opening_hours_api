@@ -6,15 +6,15 @@ from examples import example_input, example_output
 
 app = Flask(__name__)
 
-weekday_order = {
-    "monday": 0,
-    "tuesday": 1,
-    "wednesday": 2,
-    "thursday": 3,
-    "friday": 4,
-    "saturday": 5,
-    "sunday": 6,
-}
+ordered_weekdays = [
+    "monday",
+    "tuesday",
+    "wednesday",
+    "thursday",
+    "friday",
+    "saturday",
+    "sunday",
+]
 
 
 def show_shifts_endpoint_instructions():
@@ -35,7 +35,7 @@ def show_shifts_endpoint_instructions():
 
 def validate_shifts(shifts_data: dict) -> List[str]:
     errors = list()
-    for day in weekday_order:
+    for day in ordered_weekdays:
         if day not in shifts_data:
             errors.append(f"'{day}' data missed in JSON input")
         else:
