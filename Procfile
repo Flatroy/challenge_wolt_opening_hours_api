@@ -1,1 +1,1 @@
-web: gunicorn words_analyzer:app
+web: gunicorn opening_hours:app
