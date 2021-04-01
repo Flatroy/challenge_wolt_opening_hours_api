@@ -1,7 +1,29 @@
 A program that takes JSON-formatted opening hours of a restaurant as an input and outputs hours in more human-readable
 format.
 
-# Local setup
+## Demo app
+
+1. Open in the browser: https://py-opening-hours.herokuapp.com/
+   -> This will show you following instructions. Just copy and run curl command.
+2. Send POST request with JSON string to parse, e.g.
+
+```
+curl --header "Content-Type: application/json" --request POST --data '{ "monday":[ ], "tuesday":[ { "type":"open", "value":36000 }, { "type":"close", "value":64800 } ], "wednesday":[ ], "thursday":[ { "type":"open", "value":36000 }, { "type":"close", "value":64800 } ], "friday":[ { "type":"open", "value":36000 } ], "saturday":[ { "type":"close", "value":3600 }, { "type":"open", "value":36000 } ], "sunday":[ { "type":"close", "value":3600 }, { "type":"open", "value":43200 }, { "type":"close", "value":75600 } ] } ' https://py-opening-hours.herokuapp.com/shifts
+```
+
+The result will be as below:
+
+```
+Monday: Closed
+Tuesday: 10 AM - 6 PM
+Wednesday: Closed
+Thursday: 10 AM - 6 PM
+Friday: 10 AM - 1 AM
+Saturday: 10 AM - 1 AM
+Sunday: 12 PM - 9 PM
+```
+
+## Local setup
 
 Setup environment
 
@@ -17,7 +39,7 @@ Install dependencies
 pip3 install -r requirements.txt
 ```
 
-# Local run (for development)
+## Local run (for development)
 
 Set entrypoint and run the app
 
@@ -29,7 +51,7 @@ python -m flask run
 
 Navigate to `http://127.0.0.1:5000/shifts` for further instructions
 
-# Testing
+## Testing
 
 To run unit tests use following command:
 
