@@ -1,17 +1,12 @@
-from flask import Flask, request
+from flask import Flask, request, redirect, url_for
 
 from examples import example_input, example_output
 
 app = Flask(__name__)
 
 
-@app.route("/shifts", methods=["GET", "POST"])
-def shifts():
-    if request.method == "POST":
-        json_data = request.get_json()  # raise and return "bad request" if non-valid JSON
-        return json_data
-    else:
-        return f"""
+def show_shifts_endpoint_instructions():
+    return f"""
         <html>
         <head><title>Opening Hours</title></head>
         <body>
@@ -24,3 +19,17 @@ def shifts():
         </body>
         </html>
         """
+
+
+@app.route('/')
+def index():
+    return redirect(url_for('shifts'))
+
+
+@app.route("/shifts", methods=["GET", "POST"])
+def shifts():
+    if request.method == "POST":
+        json_data = request.get_json()  # raise and return "bad request" if non-valid JSON
+        return json_data
+    else:
+        return show_shifts_endpoint_instructions()
