@@ -64,5 +64,4 @@ Wednesday: Closed
 Thursday: 10 AM - 6 PM
 Friday: 10 AM - 1 AM
 Saturday: 10 AM - 1 AM
-Sunday: 12 PM - 9 PM
-"""
+Sunday: 12 PM - 9 PM"""
