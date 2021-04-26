@@ -89,3 +89,8 @@ python -m unittest -v
   from and if we guaranteed that the input data is correct):
 	* shift opened on new day before closing shift from previous day OR missed closing shift from previous day
 	* overlapping shifts (within the same day, for example)
+
+## Feedback from Wolt
+> The assignment solution was simple, minimalistic, and easy to follow which is good.  However, there was some irrelevant stuff brought to the assignment (databases, Jinja2, environment variables, and HTML) when the assignment task itself was to build a simple API server. The code was mainly good: there weren't many major flaws. 
+
+My comment: it's pretty weird feedback as the solution doesn't has any _databases, Jinja2, environment variables, and HTML_ (well, maybe chunk of HTML for GET request and redirect for "/" for better UX, but is that really bad?).
